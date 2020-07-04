@@ -1,0 +1,34 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments/header :: header"/>
+<body>
+<div class="container">
+    <div th:replace="fragments/bodyHeader :: bodyHeader"/>
+    <form th:action="@{/rooms/new}" th:object="${RoomForm}" method="post">
+
+        <div class="form-group"><label th:for="title">방 제목</label>
+            <input type="text" th:field="*{title}" class="form-control" placeholder="방 이름을 입력하세요">
+        </div>
+
+        <div class="form-group"><label th:for="content">방 설명</label>
+            <input type="text" th:field="*{content}" class="form-control" placeholder="방을 설명해주세요.">
+        </div>
+
+        <div class="form-group"><label th:for="startDate">시작 날짜 (해당 날로부터 3일간 이용가능합니다. 예) 6.19 ~ 6.21.  )</label>
+            <input type="date" th:field="*{startDate}" class="form-control" placeholder="시작날부터 3일간 이용가능합니다.">
+        </div>
+
+        <div class="form-group"><label th:for="manager">관리자 번호</label>
+            <input type="datetime-local" th:field="*{manager}" class="form-control" placeholder="관리자 번호를 입력하세요.">
+        </div>
+
+
+
+        <button type="submit" class="btn btn-primary">Submit</button>
+
+    </form>
+    <br/>
+    <div th:replace="fragments/footer :: footer"/>
+</div> <!-- /container -->
+</body>
+</html>

@@ -1,0 +1,42 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments/header :: header"/>
+<body>
+<div class="container">
+    <div th:replace="fragments/bodyHeader :: bodyHeader"/>
+    <div>
+        <table class="table table-striped">
+            <thead>
+            <tr>
+                <h3 th:text="*{title}"> </h3>
+            </tr>
+            <tr>
+                <th>#</th>
+                <th th:text="*{firstDay}"></th>
+                <th th:text="*{secondDay}"></th>
+                <th th:text="*{thirdDay}"></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="form : ${form}">
+                <td th:text="${form.time}"></td>
+                <td th:switch="${form.day1}">
+                    <span th:case="${form.day1.AVAILABLE}" class="btn-info">예약가능</span>
+                    <span th:case="${form.day1.BANNED}" class="btn-danger">예약불가</span>
+                </td>
+                <td th:switch="${form.day2}">
+                    <span th:case="${form.day2.AVAILABLE}" class="btn-info">예약가능</span>
+                    <span th:case="${form.day2.BANNED}" class="btn-danger">예약불가</span>
+                </td>
+                <td th:switch="${form.day3}">
+                    <span th:case="${form.day3.AVAILABLE}" class="btn-info">예약가능</span>
+                    <span th:case="${form.day3.BANNED}" class="btn-danger">예약불가</span>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+    <div th:replace="fragments/footer :: footer"/>
+</div> <!-- /container -->
+</body>
+</html>

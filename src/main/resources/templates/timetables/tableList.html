@@ -1,0 +1,128 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments/header :: header"/>
+<body>
+<div class="container">
+    <div th:replace="fragments/bodyHeader :: bodyHeader"/>
+    <div>
+        <div>
+            <form th:object="${timetableForm}" class="form-inline" method="post">
+<!--                <div class="form-group mb-2">
+                    <input type="text" th:field="*{memberName}" class="formcontrol"
+                                                    placeholder="회원명"/></div>-->
+                <div>
+                    <h3 th:value="*{title}" th:text="*{title}"/>
+                </div>
+
+                <div class="form-group mx-sm-1 mb-2">
+                    <select th:field="*{date}" class="form-control" th:align="center">
+
+                        <option value="">날짜</option>
+                        <option th:value="*{date1}" th:text="*{date1}"/>
+                        <option th:value="*{date2}" th:text="*{date2}"/>
+                        <option th:value="*{date3}" th:text="*{date3}"/>
+
+                </select>
+                </div>
+
+                <div class="form-group mx-sm-1 mb-2">
+                    <select th:field="*{startTime}" class="form-control" th:align="center" >
+
+                        <option value="">시작 시간</option>
+                        <option th:value="06">06 : 00</option>
+                        <option th:value="07">07 : 00</option>
+                        <option th:value="08">08 : 00</option>
+                        <option th:value="09">09 : 00</option>
+                        <option th:value="10">10 : 00</option>
+                        <option th:value="11">11 : 00</option>
+                        <option th:value="12">12 : 00</option>
+                        <option th:value="13">13 : 00</option>
+                        <option th:value="14">14 : 00</option>
+                        <option th:value="15">15 : 00</option>
+                        <option th:value="16">16 : 00</option>
+                        <option th:value="17">17 : 00</option>
+                        <option th:value="18">18 : 00</option>
+                        <option th:value="19">19 : 00</option>
+                        <option th:value="20">20 : 00</option>
+                        <option th:value="21">21 : 00</option>
+                        <option th:value="22">22 : 00</option>
+                        <option th:value="23">23 : 00</option>
+                        <option th:value="24">24 : 00</option>
+<!--                        <option th:value="01">01 : 00</option>
+                        <option th:value="02">02 : 00</option>
+                        <option th:value="03">03 : 00</option>
+                        <option th:value="04">04 : 00</option>
+                        <option th:value="05">05 : 00</option>-->
+                    </select>
+                </div>
+
+                <div class="form-group mx-sm-1 mb-2">
+                    <select th:field="*{endTime}" class="form-control" th:align="center" >
+
+                        <option value="">종료 시간</option>
+                        <option th:value="06">06 : 00</option>
+                        <option th:value="07">07 : 00</option>
+                        <option th:value="08">08 : 00</option>
+                        <option th:value="09">09 : 00</option>
+                        <option th:value="10">10 : 00</option>
+                        <option th:value="11">11 : 00</option>
+                        <option th:value="12">12 : 00</option>
+                        <option th:value="13">13 : 00</option>
+                        <option th:value="14">14 : 00</option>
+                        <option th:value="15">15 : 00</option>
+                        <option th:value="16">16 : 00</option>
+                        <option th:value="17">17 : 00</option>
+                        <option th:value="18">18 : 00</option>
+                        <option th:value="19">19 : 00</option>
+                        <option th:value="20">20 : 00</option>
+                        <option th:value="21">21 : 00</option>
+                        <option th:value="22">22 : 00</option>
+                        <option th:value="23">23 : 00</option>
+                        <option th:value="24">24 : 00</option>
+<!--                        <option th:value="01">01 : 00</option>
+                        <option th:value="02">02 : 00</option>
+                        <option th:value="03">03 : 00</option>
+                        <option th:value="04">04 : 00</option>
+                        <option th:value="05">05 : 00</option>-->
+                    </select>
+                </div>
+
+                <input type="hidden" th:field="*{localDate}" th:value="*{localDate}">
+                <button type="submit" class="btn btn-primary mb-2">추가</button>
+            </form>
+        </div>
+
+        <table class="table table-striped">
+            <thead>
+            <tr>
+                <th>#</th>
+                <th>날짜</th>
+                <th>시작 시간</th>
+                <th>종료 시간</th>
+                <th>상태</th>
+                <th></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="table : ${tables}">
+                <td th:text="${table.id}"></td>
+                <td th:text="${table.timetable.localDate}"></td>
+                <td th:text="${table.timetable.startTime}"></td>
+                <td th:text="${table.timetable.endTime}"></td>
+                <td th:text="${table.timetable.tableStatus}"></td>
+                <td><a href="#" th:href="@{/timetables/{id}/delete (id=${table.id})}" class="btn btn-danger"
+                       role="button">제거</a></td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+    <div th:replace="fragments/footer :: footer"/>
+</div> <!-- /container -->
+</body>
+<script>    function cancel(id) {
+    var form = document.createElement("form");
+    form.setAttribute("method", "post");
+    form.setAttribute("action", "/orders/" + id + "/cancel");
+    document.body.appendChild(form);
+    form.submit();
+} </script>
